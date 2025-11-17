@@ -4,7 +4,285 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-Voting Ketua OSIS SMKN 1 AMPELGADING</title>
-    <link rel="stylesheet" href="style.css">
+   <style>
+       body {
+    background: linear-gradient(140deg, #fde0ea 0%, #fff4fb 100%);
+    margin: 0;
+    font-family: 'Segoe UI', 'Montserrat', sans-serif;
+}
+
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    background: #ffffffcc;
+    box-shadow: 0 6px 36px rgba(241, 88, 163, 0.15);
+    border-radius: 18px;
+    overflow: hidden;
+    padding: 0 20px 20px 20px;
+}
+
+header {
+    text-align: center;
+    padding: 36px 10px 18px 10px;
+    background: linear-gradient(120deg, #f8bbd0 80%, #fde0ea 100%);
+    color: #da3d7d;
+    border-radius: 0 0 40px 40px;
+}
+
+header h1 {
+    margin-bottom: 8px;
+    font-size: 2.4em;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+header h2 {
+    margin: 0;
+    font-weight: 500;
+    font-size: 1.25em;
+    color: #cf3d86;
+}
+
+header p {
+    margin-top: 12px;
+    font-size: 1.05em;
+    color: #b03c6d;
+}
+
+.candidates {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    justify-content: center;
+    padding: 24px 0;
+}
+
+.candidate-card {
+    background: #fffafd;
+    box-shadow: 0 2px 12px #feb6e2a1;
+    border-radius: 24px;
+    text-align: center;
+    padding: 24px;
+    width: 210px;
+    transition: box-shadow 0.2s;
+    position: relative;
+}
+
+.candidate-card img {
+    width: 82px;
+    height: 82px;
+    border-radius: 50%;
+    border: 3px solid #f8bbd0;
+    object-fit: cover;
+    margin-bottom: 14px;
+    box-shadow: 0 1px 12px #f8bbd0a0;
+}
+
+.candidate-card h3 {
+    margin: 0 0 10px 0;
+    color: #da3d7d;
+    font-size: 1.2em;
+    font-weight: 700;
+}
+
+.candidate-card p {
+    font-size: 1em;
+    color: #a0446f;
+    margin-bottom: 14px;
+}
+
+.candidate-card label {
+    display: block;
+    background: #fed5ed;
+    padding: 5px 0;
+    border-radius: 14px;
+    color: #d23d7a;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-bottom: 0;
+}
+
+.candidate-card label input[type="radio"] {
+    accent-color: #da3d7d;
+    margin-right: 6px;
+    vertical-align: middle;
+}
+
+.candidate-card:hover {
+    box-shadow: 0 5px 24px #fa81b1a1;
+}
+
+.vote-btn {
+    margin: 32px auto 0 auto;
+    width: 100%;
+    padding: 14px 0;
+    background: linear-gradient(90deg, #d987a6 60%, #fde0ea 100%);
+    color: #fff;
+    font-size: 1.2em;
+    font-weight: 700;
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 3px 12px #feb6e2a0;
+    cursor: pointer;
+    transition: background 0.3s, box-shadow 0.2s;
+}
+
+.vote-btn:hover {
+    background: linear-gradient(90deg, #fa81b1 60%, #fbb5de 100%);
+    box-shadow: 0 6px 24px #feb6e2a0;
+}
+
+.results {
+    margin-top: 36px;
+    background: #fffafc;
+    border-radius: 18px;
+    box-shadow: 0 2px 10px #feb6e219;
+    padding: 24px;
+    text-align: center;
+}
+
+.results h2 {
+    color: #da3d7d;
+    margin-bottom: 20px;
+}
+
+.results table {
+    margin: 0 auto 20px auto;
+    border-collapse: collapse;
+    width: 90%;
+    background: #fffafd;
+}
+
+.results table th, .results table td {
+    border: 1px solid #feb6e2;
+    padding: 10px;
+    font-size: 1em;
+}
+
+.results table th {
+    background: #fde0ea;
+    color: #d44281;
+}
+
+.results table td {
+    background: #fffafc;
+    color: #a0446f;
+}
+
+.bar-charts {
+    margin-top: 10px;
+    padding: 0 18px;
+}
+
+.bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 5px;
+}
+
+.bar-label {
+    width: 115px;
+    text-align: left;
+    color: #d44281;
+    font-weight: 600;
+}
+
+.bar-value {
+    background: #fee8ef;
+    border-radius: 12px;
+    height: 18px;
+    width: 60%;
+    position: relative;
+    margin-right: 10px;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg,#f8bbd0 60%, #fa81b1 100%);
+    border-radius: 12px 0 0 12px;
+}
+
+.bar-percentage {
+    width: 60px;
+    color: #a0446f;
+    text-align: right;
+    font-size: 0.98em;
+}
+
+footer {
+    text-align: center;
+    padding: 18px 0 0 0;
+    color: #db6aa3;
+    font-size: 0.9em;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 99;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(252, 228, 243, 0.86);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: #fff4fb;
+    border-radius: 24px;
+    padding: 38px 32px;
+    text-align: center;
+    box-shadow: 0 4px 24px #f8bbd0a0;
+}
+
+.modal-content h2 {
+    color: #d44281;
+    margin-bottom: 10px;
+}
+
+.modal-content p {
+    color: #a0446f;
+    font-size: 1em;
+    margin-bottom: 22px;
+}
+
+.close-btn {
+    background: #f8bbd0;
+    color: #d44281;
+    border: none;
+    border-radius: 16px;
+    padding: 12px 36px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 12px #feb6e2a0;
+    transition: background 0.3s;
+}
+.close-btn:hover {
+    background: #fa81b1;
+}
+@media (max-width: 700px) {
+    .container {
+        max-width: 98vw;
+        margin: 12px auto;
+        padding: 0 2vw 16px 2vw;
+    }
+    .candidates {
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+    }
+    .candidate-card {
+        width: 80vw;
+    }
+    .bar-label, .bar-percentage { font-size: 0.9em; }
+}
+   </style>
 </head>
 <body>
     <div class="container">
